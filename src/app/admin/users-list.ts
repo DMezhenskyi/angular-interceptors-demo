@@ -32,26 +32,17 @@ interface User {
 })
 export class UsersList {
   #http = inject(HttpClient);
-  #auth = inject(Auth);
 
   protected updateError = signal(false);
 
   protected readonly data = httpResource<{ users: User[] }>(() => ({
-    url: `https://dummyjson.com/auth/users?limit=5`,
-    headers: {
-      Authorization: `Bearer ${this.#auth.token()}`,
-    },
+    url: `https://dummyjson.com/auth/users?limit=5`
   }));
 
   unenrollUser(userId: number) {
     this.#http.patch<User>(
         `https://dummyjson.com/auth/users/${userId}`,
-        { enrolled: false },
-        {
-          headers: {
-            Authorization: `Bearer ${this.#auth.token()}`,
-          }
-        }
+        { enrolled: false }
       )
       .subscribe({
         next: () => this.updatedSuccessfully(userId),
