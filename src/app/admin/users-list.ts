@@ -31,6 +31,7 @@ interface User {
   `,
 })
 export class UsersList {
+
   #http = inject(HttpClient);
 
   protected updateError = signal(false);

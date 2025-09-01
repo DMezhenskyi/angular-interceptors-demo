@@ -14,7 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => inject(Auth).authenticateDummyUser()),
     provideHttpClient(
       withInterceptors([
-        authInterceptor,
         globalHttpErrorInterceptor
       ])
     ),
